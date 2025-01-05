@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <winsock2.h>
-#include <ws2tcpip.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
 
 User users[MAX_USERS];
 int user_count = 0;

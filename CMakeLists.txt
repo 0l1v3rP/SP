@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.22.1)
 project(SP C)
 
 set(CMAKE_C_STANDARD 11)
@@ -9,5 +9,5 @@ add_executable(SP main.c
         server.h
         config.h
         table.c
-        table.h)
-target_link_libraries(SP PRIVATE ws2_32)
+        table.h
+)
