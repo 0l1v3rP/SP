@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/SP.dir/src/server/server.c.o CMakeFiles/SP.dir/src/main.c.o CMakeFiles/SP.dir/src/client/client.c.o CMakeFiles/SP.dir/src/server/data/table.c.o -o SP 
