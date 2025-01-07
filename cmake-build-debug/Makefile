@@ -129,29 +129,29 @@ SP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/build
 .PHONY : SP/fast
 
-src/client.o: src/client.c.o
-.PHONY : src/client.o
+src/client/client.o: src/client/client.c.o
+.PHONY : src/client/client.o
 
 # target to build an object file
-src/client.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/client.c.o
-.PHONY : src/client.c.o
+src/client/client.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/client/client.c.o
+.PHONY : src/client/client.c.o
 
-src/client.i: src/client.c.i
-.PHONY : src/client.i
+src/client/client.i: src/client/client.c.i
+.PHONY : src/client/client.i
 
 # target to preprocess a source file
-src/client.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/client.c.i
-.PHONY : src/client.c.i
+src/client/client.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/client/client.c.i
+.PHONY : src/client/client.c.i
 
-src/client.s: src/client.c.s
-.PHONY : src/client.s
+src/client/client.s: src/client/client.c.s
+.PHONY : src/client/client.s
 
 # target to generate assembly for a file
-src/client.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/client.c.s
-.PHONY : src/client.c.s
+src/client/client.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/client/client.c.s
+.PHONY : src/client/client.c.s
 
 src/main.o: src/main.c.o
 .PHONY : src/main.o
@@ -177,53 +177,53 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/main.c.s
 .PHONY : src/main.c.s
 
-src/server.o: src/server.c.o
-.PHONY : src/server.o
+src/server/data/table.o: src/server/data/table.c.o
+.PHONY : src/server/data/table.o
 
 # target to build an object file
-src/server.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server.c.o
-.PHONY : src/server.c.o
+src/server/data/table.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server/data/table.c.o
+.PHONY : src/server/data/table.c.o
 
-src/server.i: src/server.c.i
-.PHONY : src/server.i
+src/server/data/table.i: src/server/data/table.c.i
+.PHONY : src/server/data/table.i
 
 # target to preprocess a source file
-src/server.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server.c.i
-.PHONY : src/server.c.i
+src/server/data/table.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server/data/table.c.i
+.PHONY : src/server/data/table.c.i
 
-src/server.s: src/server.c.s
-.PHONY : src/server.s
+src/server/data/table.s: src/server/data/table.c.s
+.PHONY : src/server/data/table.s
 
 # target to generate assembly for a file
-src/server.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server.c.s
-.PHONY : src/server.c.s
+src/server/data/table.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server/data/table.c.s
+.PHONY : src/server/data/table.c.s
 
-src/table.o: src/table.c.o
-.PHONY : src/table.o
+src/server/server.o: src/server/server.c.o
+.PHONY : src/server/server.o
 
 # target to build an object file
-src/table.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/table.c.o
-.PHONY : src/table.c.o
+src/server/server.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server/server.c.o
+.PHONY : src/server/server.c.o
 
-src/table.i: src/table.c.i
-.PHONY : src/table.i
+src/server/server.i: src/server/server.c.i
+.PHONY : src/server/server.i
 
 # target to preprocess a source file
-src/table.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/table.c.i
-.PHONY : src/table.c.i
+src/server/server.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server/server.c.i
+.PHONY : src/server/server.c.i
 
-src/table.s: src/table.c.s
-.PHONY : src/table.s
+src/server/server.s: src/server/server.c.s
+.PHONY : src/server/server.s
 
 # target to generate assembly for a file
-src/table.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/table.c.s
-.PHONY : src/table.c.s
+src/server/server.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SP.dir/build.make CMakeFiles/SP.dir/src/server/server.c.s
+.PHONY : src/server/server.c.s
 
 # Help Target
 help:
@@ -234,18 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SP"
-	@echo "... src/client.o"
-	@echo "... src/client.i"
-	@echo "... src/client.s"
+	@echo "... src/client/client.o"
+	@echo "... src/client/client.i"
+	@echo "... src/client/client.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/server.o"
-	@echo "... src/server.i"
-	@echo "... src/server.s"
-	@echo "... src/table.o"
-	@echo "... src/table.i"
-	@echo "... src/table.s"
+	@echo "... src/server/data/table.o"
+	@echo "... src/server/data/table.i"
+	@echo "... src/server/data/table.s"
+	@echo "... src/server/server.o"
+	@echo "... src/server/server.i"
+	@echo "... src/server/server.s"
 .PHONY : help
 
 

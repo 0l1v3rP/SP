@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/c/Users/Acer/Downloads/SP/src/client.c" "CMakeFiles/SP.dir/src/client.c.o" "gcc" "CMakeFiles/SP.dir/src/client.c.o.d"
+  "/mnt/c/Users/Acer/Downloads/SP/src/client/client.c" "CMakeFiles/SP.dir/src/client/client.c.o" "gcc" "CMakeFiles/SP.dir/src/client/client.c.o.d"
   "/mnt/c/Users/Acer/Downloads/SP/src/main.c" "CMakeFiles/SP.dir/src/main.c.o" "gcc" "CMakeFiles/SP.dir/src/main.c.o.d"
-  "/mnt/c/Users/Acer/Downloads/SP/src/server.c" "CMakeFiles/SP.dir/src/server.c.o" "gcc" "CMakeFiles/SP.dir/src/server.c.o.d"
-  "/mnt/c/Users/Acer/Downloads/SP/src/table.c" "CMakeFiles/SP.dir/src/table.c.o" "gcc" "CMakeFiles/SP.dir/src/table.c.o.d"
+  "/mnt/c/Users/Acer/Downloads/SP/src/server/data/table.c" "CMakeFiles/SP.dir/src/server/data/table.c.o" "gcc" "CMakeFiles/SP.dir/src/server/data/table.c.o.d"
+  "/mnt/c/Users/Acer/Downloads/SP/src/server/server.c" "CMakeFiles/SP.dir/src/server/server.c.o" "gcc" "CMakeFiles/SP.dir/src/server/server.c.o.d"
   )
 
 # Targets to which this target links.

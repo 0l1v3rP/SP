@@ -69,19 +69,19 @@ include CMakeFiles/SP.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/SP.dir/flags.make
 
-CMakeFiles/SP.dir/src/server.c.o: CMakeFiles/SP.dir/flags.make
-CMakeFiles/SP.dir/src/server.c.o: ../src/server.c
-CMakeFiles/SP.dir/src/server.c.o: CMakeFiles/SP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SP.dir/src/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SP.dir/src/server.c.o -MF CMakeFiles/SP.dir/src/server.c.o.d -o CMakeFiles/SP.dir/src/server.c.o -c /mnt/c/Users/Acer/Downloads/SP/src/server.c
+CMakeFiles/SP.dir/src/server/server.c.o: CMakeFiles/SP.dir/flags.make
+CMakeFiles/SP.dir/src/server/server.c.o: ../src/server/server.c
+CMakeFiles/SP.dir/src/server/server.c.o: CMakeFiles/SP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SP.dir/src/server/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SP.dir/src/server/server.c.o -MF CMakeFiles/SP.dir/src/server/server.c.o.d -o CMakeFiles/SP.dir/src/server/server.c.o -c /mnt/c/Users/Acer/Downloads/SP/src/server/server.c
 
-CMakeFiles/SP.dir/src/server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SP.dir/src/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Acer/Downloads/SP/src/server.c > CMakeFiles/SP.dir/src/server.c.i
+CMakeFiles/SP.dir/src/server/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SP.dir/src/server/server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Acer/Downloads/SP/src/server/server.c > CMakeFiles/SP.dir/src/server/server.c.i
 
-CMakeFiles/SP.dir/src/server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SP.dir/src/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Acer/Downloads/SP/src/server.c -o CMakeFiles/SP.dir/src/server.c.s
+CMakeFiles/SP.dir/src/server/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SP.dir/src/server/server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Acer/Downloads/SP/src/server/server.c -o CMakeFiles/SP.dir/src/server/server.c.s
 
 CMakeFiles/SP.dir/src/main.c.o: CMakeFiles/SP.dir/flags.make
 CMakeFiles/SP.dir/src/main.c.o: ../src/main.c
@@ -97,48 +97,48 @@ CMakeFiles/SP.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SP.dir/src/main.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Acer/Downloads/SP/src/main.c -o CMakeFiles/SP.dir/src/main.c.s
 
-CMakeFiles/SP.dir/src/client.c.o: CMakeFiles/SP.dir/flags.make
-CMakeFiles/SP.dir/src/client.c.o: ../src/client.c
-CMakeFiles/SP.dir/src/client.c.o: CMakeFiles/SP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SP.dir/src/client.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SP.dir/src/client.c.o -MF CMakeFiles/SP.dir/src/client.c.o.d -o CMakeFiles/SP.dir/src/client.c.o -c /mnt/c/Users/Acer/Downloads/SP/src/client.c
+CMakeFiles/SP.dir/src/client/client.c.o: CMakeFiles/SP.dir/flags.make
+CMakeFiles/SP.dir/src/client/client.c.o: ../src/client/client.c
+CMakeFiles/SP.dir/src/client/client.c.o: CMakeFiles/SP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SP.dir/src/client/client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SP.dir/src/client/client.c.o -MF CMakeFiles/SP.dir/src/client/client.c.o.d -o CMakeFiles/SP.dir/src/client/client.c.o -c /mnt/c/Users/Acer/Downloads/SP/src/client/client.c
 
-CMakeFiles/SP.dir/src/client.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SP.dir/src/client.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Acer/Downloads/SP/src/client.c > CMakeFiles/SP.dir/src/client.c.i
+CMakeFiles/SP.dir/src/client/client.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SP.dir/src/client/client.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Acer/Downloads/SP/src/client/client.c > CMakeFiles/SP.dir/src/client/client.c.i
 
-CMakeFiles/SP.dir/src/client.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SP.dir/src/client.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Acer/Downloads/SP/src/client.c -o CMakeFiles/SP.dir/src/client.c.s
+CMakeFiles/SP.dir/src/client/client.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SP.dir/src/client/client.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Acer/Downloads/SP/src/client/client.c -o CMakeFiles/SP.dir/src/client/client.c.s
 
-CMakeFiles/SP.dir/src/table.c.o: CMakeFiles/SP.dir/flags.make
-CMakeFiles/SP.dir/src/table.c.o: ../src/table.c
-CMakeFiles/SP.dir/src/table.c.o: CMakeFiles/SP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SP.dir/src/table.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SP.dir/src/table.c.o -MF CMakeFiles/SP.dir/src/table.c.o.d -o CMakeFiles/SP.dir/src/table.c.o -c /mnt/c/Users/Acer/Downloads/SP/src/table.c
+CMakeFiles/SP.dir/src/server/data/table.c.o: CMakeFiles/SP.dir/flags.make
+CMakeFiles/SP.dir/src/server/data/table.c.o: ../src/server/data/table.c
+CMakeFiles/SP.dir/src/server/data/table.c.o: CMakeFiles/SP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SP.dir/src/server/data/table.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SP.dir/src/server/data/table.c.o -MF CMakeFiles/SP.dir/src/server/data/table.c.o.d -o CMakeFiles/SP.dir/src/server/data/table.c.o -c /mnt/c/Users/Acer/Downloads/SP/src/server/data/table.c
 
-CMakeFiles/SP.dir/src/table.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SP.dir/src/table.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Acer/Downloads/SP/src/table.c > CMakeFiles/SP.dir/src/table.c.i
+CMakeFiles/SP.dir/src/server/data/table.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SP.dir/src/server/data/table.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Acer/Downloads/SP/src/server/data/table.c > CMakeFiles/SP.dir/src/server/data/table.c.i
 
-CMakeFiles/SP.dir/src/table.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SP.dir/src/table.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Acer/Downloads/SP/src/table.c -o CMakeFiles/SP.dir/src/table.c.s
+CMakeFiles/SP.dir/src/server/data/table.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SP.dir/src/server/data/table.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Acer/Downloads/SP/src/server/data/table.c -o CMakeFiles/SP.dir/src/server/data/table.c.s
 
 # Object files for target SP
 SP_OBJECTS = \
-"CMakeFiles/SP.dir/src/server.c.o" \
+"CMakeFiles/SP.dir/src/server/server.c.o" \
 "CMakeFiles/SP.dir/src/main.c.o" \
-"CMakeFiles/SP.dir/src/client.c.o" \
-"CMakeFiles/SP.dir/src/table.c.o"
+"CMakeFiles/SP.dir/src/client/client.c.o" \
+"CMakeFiles/SP.dir/src/server/data/table.c.o"
 
 # External object files for target SP
 SP_EXTERNAL_OBJECTS =
 
-SP: CMakeFiles/SP.dir/src/server.c.o
+SP: CMakeFiles/SP.dir/src/server/server.c.o
 SP: CMakeFiles/SP.dir/src/main.c.o
-SP: CMakeFiles/SP.dir/src/client.c.o
-SP: CMakeFiles/SP.dir/src/table.c.o
+SP: CMakeFiles/SP.dir/src/client/client.c.o
+SP: CMakeFiles/SP.dir/src/server/data/table.c.o
 SP: CMakeFiles/SP.dir/build.make
 SP: CMakeFiles/SP.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable SP"
