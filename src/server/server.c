@@ -1,5 +1,5 @@
-#include "../headers/server.h"
-#include "../headers/config.h"
+#include "../../headers/server/server.h"
+#include "../../headers/config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

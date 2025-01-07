@@ -1,8 +1,4 @@
-//
-// Created by dablkros on 5. 1. 2025.
-//
-
-#include "../headers/table.h"
+#include "../../../headers/server/data/table.h"
 
 Table *table_create(const char *name) {
     Table *table = (Table *)malloc(sizeof(Table));

@@ -1,5 +1,5 @@
-#include "../headers/client.h"
-#include "../headers/config.h"
+#include "../../headers/client/client.h"
+#include "../../headers/config.h"
 #ifdef _WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>

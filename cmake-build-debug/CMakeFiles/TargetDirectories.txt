@@ -1,0 +1,3 @@
+/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles/SP.dir
+/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Acer/Downloads/SP/cmake-build-debug/CMakeFiles/rebuild_cache.dir

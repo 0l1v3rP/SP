@@ -3,12 +3,12 @@ project(SP C)
 
 set(CMAKE_C_STANDARD 11)
 add_executable(SP
-        src/server.c
+        src/server/server.c
         src/main.c
-        src/client.c
-        src/table.c
-        headers/client.h
+        src/client/client.c
+        src/server/data/table.c
+        headers/client/client.h
         headers/config.h
-        headers/server.h
-        headers/table.h
+        headers/server/server.h
+        headers/server/data/table.h
 )
