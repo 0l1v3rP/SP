@@ -1,0 +1,4 @@
+#ifndef TABLEBUSINESS_H
+#define TABLEBUSINESS_H
+
+#endif //TABLEBUSINESS_H

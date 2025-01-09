@@ -1,4 +1,5 @@
 #include "../../headers/client/client.h"
+#include "../../headers/client/comHandler.h"
 #include "../../headers/config.h"
 #ifdef _WIN32
 #include <winsock2.h>
@@ -41,42 +42,66 @@ void start_client(const char *server_ip) {
         exit(1);
     } else {
         printf("Connected to server at %s:%d\n", server_ip, PORT);
+        printf("press:\n\t 'help' for manual\n\t 'exit' for exiting program\n");
+
+    }
+
+    Request req;
+    req.session_id = 0;  // Start unsigned
+    char response[MAX_CHUNK_SIZE];
+
+    // Initial session check
+    req.data[0] = '\0';
+    strcpy(req.command, "session_check");
+    req.data_size = 0;
+
+    if (send_chunked(client_socket, (char*)&req, sizeof(Request)) < 0) {
+        perror("Initial session check failed");
+        exit(1);
+    }
+
+    int bytes_read = recv_chunked(client_socket, response, MAX_CHUNK_SIZE);
+    if (bytes_read > 0) {
+        req.session_id = atoi(response);
     }
 
     while (running) {
-        printf("Enter command: ");
-        fgets(buffer, sizeof(buffer), stdin);
-
-        buffer[strcspn(buffer, "\n")] = 0; // Odstráni nový riadok
-
-        if (strlen(buffer) == 0) {
+        printf("shell>");
+        fgets(req.data, sizeof(req.data), stdin);
+        req.data[strcspn(req.data, "\n")] = 0;
+        req.data_size = strlen(req.data);
+        if (req.data_size == 0) {
             printf("Empty command, try again.\n");
             continue;
         }
 
-        if (strcmp(buffer, "EXIT") == 0) {
+        strncpy(req.command, req.data, 31);
+        req.command[31] = '\0';
+
+        if (strcmp(req.command, "exit") == 0) {
             running = 0;
             printf("Exiting client...\n");
             break;
         }
 
-        // Odosielanie príkazu serveru
-        if (send(client_socket, buffer, strlen(buffer), 0) < 0) {
+        if (strcmp(req.command, "help") == 0) {
+            print_manual();
+            continue;
+        }
+
+        if (send_chunked(client_socket, (char*)&req, sizeof(Request)) < 0) {
             perror("Send failed");
             running = 0;
             break;
         }
-        printf("Sent command: %s\n", buffer);
+        printf("Sent command: %s\n", req.command);
 
-        // Prijímanie odpovede od servera
-        memset(buffer, 0, sizeof(buffer)); // Vyčistenie bufferu
-        int bytes_read = recv(client_socket, buffer, sizeof(buffer) - 1, 0);
+        int bytes_read = recv_chunked(client_socket, response, MAX_CHUNK_SIZE);
         if (bytes_read > 0) {
-            buffer[bytes_read] = '\0'; // Ukončovací znak
-            printf("Server response: %s\n", buffer);
+            printf("Server response: %s\n", response);
         } else if (bytes_read == 0) {
             printf("Server closed the connection.\n");
-            running = 0; // Ukončí slučku
+            running = 0;
         } else {
             perror("Recv failed");
             running = 0;
