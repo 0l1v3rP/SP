@@ -1,7 +1,8 @@
-#include "tableModel.h"
-#include "userModel.h"
 #ifndef TABLE2USER_H
 #define TABLE2USER_H
+
+#include "./tableModel.h"
+#include "./userModel.h"
 
 typedef struct {
     int table2user_id;
@@ -10,4 +11,6 @@ typedef struct {
     Table *table;
     User *user;
 } Table2User;
+
 #endif //TABLE2USER_H
+

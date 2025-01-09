@@ -1,12 +1,12 @@
+#include <stdio.h>
+
 #ifndef COM_HANDLE_H
 #define COM_HANDLE_H
 #define MAX_CHUNK_SIZE 8192
-#define MAX_USERNAME 64
-#define MAX_PASSWORD 64
-#include <stddef.h>
+#define MAX_COMMAND_LENGTH 32
 
 typedef struct {
-    char command[32];
+    char command[MAX_COMMAND_LENGTH];
     char data[MAX_CHUNK_SIZE];
     size_t data_size;
     int session_id;

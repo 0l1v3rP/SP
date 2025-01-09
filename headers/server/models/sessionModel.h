@@ -1,4 +1,4 @@
-#include "../models/userModel.h"
+#include "./userModel.h"
 #include <time.h>
 #include <sys/types.h>
 

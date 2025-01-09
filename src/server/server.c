@@ -81,3 +81,21 @@ void handle_client(int client_socket) {
     }
     close(client_socket);
 }
+
+
+void initialize_files() {
+    const char *const filenames[] = {
+        "users.dat",
+        "sessions.dat",
+        "table2user.dat"
+    };
+
+    for (size_t i = 0; i < sizeof(filenames) / sizeof(*filenames); ++i) {
+        FILE *file = fopen(filenames[i], "ab+");
+        if (file == NULL) {
+            fprintf(stderr, "Failed to create or open %s\n", filenames[i]);
+            exit(EXIT_FAILURE);
+        }
+        fclose(file);
+    }
+}
