@@ -63,17 +63,16 @@ void start_server() {
         WSACleanup();
     #endif
 }
-
+//TODO: implement threading
 void handle_client(int client_socket) {
     Request req;
-    char response[MAX_CHUNK_SIZE];
 
     while (1) {
         memset(&req, 0, sizeof(Request));
         int bytes_read = recv(client_socket, (char*)&req, sizeof(Request), 0);
         if (bytes_read <= 0) break;
-
-        handle_request(req, response);
+        char response[MAX_CHUNK_SIZE];
+        handle_request(&req, response);
 
         if (send(client_socket, response, strlen(response), 0) < 0) {
             break;

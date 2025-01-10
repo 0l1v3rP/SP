@@ -12,7 +12,7 @@ typedef struct {
     int session_id;
 } Request;
 
-typedef void (*CommandHandler)(Request, char*);
+typedef void (*CommandHandler)(Request*, char*);
 
 typedef struct {
     const char* command;
@@ -21,12 +21,12 @@ typedef struct {
 
 
 
-void handle_request(Request req, char response[MAX_CHUNK_SIZE]);
-void handle_register(Request req, char* response);
-void handle_login(Request req, char* response);
-void handle_logout(Request req, char* response);
-void handle_session_check(Request req, char* response);
-void handle_delete_user(Request req, char* response);
+void handle_request(Request* req, char response[MAX_CHUNK_SIZE]);
+void handle_register(Request* req, char* response);
+void handle_login(Request* req, char* response);
+void handle_logout(Request* req, char* response);
+void handle_session_check(Request* req, char* response);
+void handle_delete_user(Request* req, char* response);
 
 static const CommandMapping COMMANDS[] = {
     {"register", handle_register},

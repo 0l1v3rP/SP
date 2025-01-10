@@ -23,14 +23,16 @@ _Bool register_user(const char *username, const char *password) {
     return user_create(&new_user);
 }
 
-_Bool login_user(const char *username, const char *password) {
+_Bool login_user(const char *username, const char *password, int *session_id) {
     User *user = user_get_by_name(username);
     if(user == NULL || strcmp(user->password, password) == 1) {
         free(user);
         return false;
     }
     Session new_session = {0};
-    new_session.session_id = generate_unique_id();
+    int session_id_generated = generate_unique_id();
+    new_session.session_id = session_id_generated;
+    session_id = &session_id_generated;
     new_session.user_id = user->user_id;
     new_session.expiration_time = time(NULL) + SESSION_EXPIRATION;
     session_create(&new_session);

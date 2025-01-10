@@ -66,17 +66,10 @@ void start_client(const char *server_ip) {
     }
 
     while (running) {
-        printf("shell>");
-        fgets(req.data, sizeof(req.data), stdin);
-        req.data[strcspn(req.data, "\n")] = 0;
-        req.data_size = strlen(req.data);
-        if (req.data_size == 0) {
-            printf("Empty command, try again.\n");
-            continue;
-        }
+        printf("Enter Command: ");
+        fgets(req.command, sizeof(req.command), stdin);
+        req.command[strcspn(req.command, "\n")] = 0;
 
-        strncpy(req.command, req.data, 31);
-        req.command[31] = '\0';
 
         if (strcmp(req.command, "exit") == 0) {
             running = 0;
@@ -88,6 +81,12 @@ void start_client(const char *server_ip) {
             print_manual();
             continue;
         }
+
+        printf("Enter Data: ");
+        fgets(req.data, sizeof(req.data), stdin);
+
+        req.data[strcspn(req.data, "\n")] = 0;
+        req.data_size = strlen(req.data);
 
         if (send_chunked(client_socket, (char*)&req, sizeof(Request)) < 0) {
             perror("Send failed");
