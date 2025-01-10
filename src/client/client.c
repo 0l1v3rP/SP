@@ -15,15 +15,32 @@
 
 void print_manual() {
     printf(
-        "---------------------------------START--------------------------------------\n"
+        "---------------------------------MANUAL_START--------------------------------------\n"
         "USER:\n"
         "\tCOMMAND: register\n"
         "\t\tData: {username} {password} \n\n"
         "\tCOMMAND: login\n"
         "\t\tData: {username} {password} \n\n"
-        "\tCOMMAND: logout\n\n"
+        "\tCOMMAND: logout\n"
+        "\t\tData: ENTER \n\n"
         "\tCOMMAND: delete_user\n"
-        "-----------------------------------END--------------------------------------\n"
+        "\t\tData: ENTER \n\n"
+        "TABLE:\n"
+        "\tCOMMAND: create_table\n"
+        "\t\tData: {[{column_name1} {column_type1}] [{column_name2} {column_type2}]...} \n\n"
+        "\tCOMMAND: delete_table\n"
+        "\t\tData: {table_name} \n\n"
+        "\tCOMMAND: add record\n"
+        "\t\tData: {value1 value2 value3...} \n\n"
+        "\tCOMMAND: delete record\n"
+        "\t\tData: {index} \n\n"
+        "\tCOMMAND: list_tables\n"
+        "\t\tData: ENTER \n\n"
+        "\tCOMMAND: list_records\n"
+        "\t\tData: {table_name} {list_all_records_that_contains_this_value}\n\n"
+        "\tCOMMAND: sort_table\n"
+        "\t\tData: {table_name} {sort_records_by_this_value}\n\n"
+        "-----------------------------------MANUAL_END--------------------------------------\n"
     );
 }
 
