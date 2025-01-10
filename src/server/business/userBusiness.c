@@ -32,7 +32,7 @@ _Bool login_user(const char *username, const char *password, int *session_id) {
     Session new_session = {0};
     int session_id_generated = generate_unique_id();
     new_session.session_id = session_id_generated;
-    session_id = &session_id_generated;
+    *session_id = session_id_generated; ;
     new_session.user_id = user->user_id;
     new_session.expiration_time = time(NULL) + SESSION_EXPIRATION;
     session_create(&new_session);

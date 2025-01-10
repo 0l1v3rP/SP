@@ -2,7 +2,6 @@
 #include "../../../headers/server/data/genericData.h"
 #include <string.h>
 
-
 _Bool user_create(User *user) {
     return create_generic("users.dat", user, sizeof(User));
 }

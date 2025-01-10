@@ -1,6 +1,5 @@
 #include "../../../headers/server/data/utilsData.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 int generate_unique_id() {
     const char *counter_file = "id_counter.dat";

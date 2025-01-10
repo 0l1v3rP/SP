@@ -1,5 +1,5 @@
 #include "../../headers/client/client.h"
-#include "../../headers/client/comHandler.h"
+#include "../../headers/sendRecv.h"
 #include "../../headers/config.h"
 #ifdef _WIN32
 #include <winsock2.h>
@@ -12,6 +12,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+void print_manual() {
+    printf(
+        "---------------------------------START--------------------------------------\n"
+        "USER:\n"
+        "\tCOMMAND: register\n"
+        "\t\tData: {username} {password} \n\n"
+        "\tCOMMAND: login\n"
+        "\t\tData: {username} {password} \n\n"
+        "\tCOMMAND: logout\n\n"
+        "\tCOMMAND: delete_user\n"
+        "-----------------------------------END--------------------------------------\n"
+    );
+}
+
 
 void start_client(const char *server_ip) {
     int client_socket;
@@ -47,23 +62,11 @@ void start_client(const char *server_ip) {
     }
 
     Request req;
-    req.session_id = 0;  // Start unsigned
-    char response[MAX_CHUNK_SIZE];
-
-    // Initial session check
+    req.session_id = 0;
     req.data[0] = '\0';
-    strcpy(req.command, "session_check");
-    req.data_size = 0;
 
-    if (send_chunked(client_socket, (char*)&req, sizeof(Request)) < 0) {
-        perror("Initial session check failed");
-        exit(1);
-    }
-
-    int bytes_read = recv_chunked(client_socket, response, MAX_CHUNK_SIZE);
-    if (bytes_read > 0) {
-        req.session_id = atoi(response);
-    }
+    Response res;
+    res.data[0] = '\0';
 
     while (running) {
         printf("Enter Command: ");
@@ -86,7 +89,6 @@ void start_client(const char *server_ip) {
         fgets(req.data, sizeof(req.data), stdin);
 
         req.data[strcspn(req.data, "\n")] = 0;
-        req.data_size = strlen(req.data);
 
         if (send_chunked(client_socket, (char*)&req, sizeof(Request)) < 0) {
             perror("Send failed");
@@ -94,10 +96,11 @@ void start_client(const char *server_ip) {
             break;
         }
         printf("Sent command: %s\n", req.command);
+        int bytes_read = recv_chunked(client_socket, (char*)&res, sizeof(Response));
 
-        int bytes_read = recv_chunked(client_socket, response, MAX_CHUNK_SIZE);
         if (bytes_read > 0) {
-            printf("Server response: %s\n", response);
+            printf("Server response: %s\n", res.data);
+            req.session_id = res.session_id;
         } else if (bytes_read == 0) {
             printf("Server closed the connection.\n");
             running = 0;

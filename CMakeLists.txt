@@ -4,7 +4,6 @@ project(SP C)
 set(CMAKE_C_STANDARD 11)
 add_executable(SP src/main.c
         src/server/server.c
-        src/server/comHandler.c
         src/server/business/userBusiness.c
         src/server/business/tableBusiness.c
         src/server/business/table2userBusiness.c
@@ -13,16 +12,20 @@ add_executable(SP src/main.c
         src/server/data/genericData.c
         src/server/data/table2userData.c
         src/server/data/sessionData.c
+        src/server/data/utilsData.c
+        src/server/handlers/commonHandler.c
+        src/server/handlers/userHandler.c
+        src/server/handlers/tableHandler.c
         src/client/client.c
-        src/client/comHandler.c
+        src/sendRecv.c
         headers/config.h
         headers/server/server.h
-        headers/server/comHandler.h
         headers/server/data/userData.h
         headers/server/data/tableData.h
         headers/server/data/table2userData.h
         headers/server/data/sessionData.h
         headers/server/data/genericData.h
+        headers/server/data/utilsData.h
         headers/server/business/table2userBusiness.h
         headers/server/business/userBusiness.h
         headers/server/business/tableBusiness.h
@@ -30,8 +33,9 @@ add_executable(SP src/main.c
         headers/server/models/table2userModel.h
         headers/server/models/sessionModel.h
         headers/server/models/userModel.h
-        headers/client/comHandler.h
+        headers/server/handlers/tableHandler.h
+        headers/server/handlers/userHandler.h
+        headers/server/handlers/commonHandler.h
         headers/client/client.h
-        headers/server/data/utilsData.h
-        src/server/data/utilsData.c
+        headers/sendRecv.h
 )

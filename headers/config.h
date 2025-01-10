@@ -6,5 +6,7 @@
 #define CONFIG_H
 
 #define PORT 6521
+#define MAX_CHUNK_SIZE 8192
+#define MAX_COMMAND_LENGTH 32
 
 #endif //CONFIG_H
