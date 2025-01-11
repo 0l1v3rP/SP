@@ -7,9 +7,7 @@
 typedef struct {
     int table2user_id;
     int user_id;
-    int table_id;
-    Table *table;
-    User *user;
+    char* table_name;
 } Table2User;
 
 #endif //TABLE2USER_H

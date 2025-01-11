@@ -6,7 +6,6 @@ add_executable(SP src/main.c
         src/server/server.c
         src/server/business/userBusiness.c
         src/server/business/tableBusiness.c
-        src/server/business/table2userBusiness.c
         src/server/data/tableData.c
         src/server/data/userData.c
         src/server/data/genericData.c
@@ -26,7 +25,6 @@ add_executable(SP src/main.c
         headers/server/data/sessionData.h
         headers/server/data/genericData.h
         headers/server/data/utilsData.h
-        headers/server/business/table2userBusiness.h
         headers/server/business/userBusiness.h
         headers/server/business/tableBusiness.h
         headers/server/models/tableModel.h
@@ -38,4 +36,6 @@ add_executable(SP src/main.c
         headers/server/handlers/commonHandler.h
         headers/client/client.h
         headers/sendRecv.h
+        headers/server/business/validateBusiness.h
+        src/server/business/validateBusiness.c
 )

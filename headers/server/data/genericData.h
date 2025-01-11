@@ -1,7 +1,3 @@
-//
-// Created by Acer on 09/01/2025.
-//
-
 #ifndef GENERIC_DATA_H
 #define GENERIC_DATA_H
 #include <stddef.h>

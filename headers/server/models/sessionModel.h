@@ -8,7 +8,6 @@
 typedef struct {
     int session_id;
     int user_id;
-    User user;
     time_t expiration_time;
 } Session;
 #endif //SESSIONMODEL_H
