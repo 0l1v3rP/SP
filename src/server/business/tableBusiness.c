@@ -37,6 +37,14 @@ _Bool delete_record_table(const char* table_name, int user_id, int record_id) {
     return existingTable != NULL && data_table_delete_record(table_name, user_id, record_id);
 }
 
+_Bool list_all_tables(int user_id, char* result, size_t result_size) {
+    if (result == NULL || result_size == 0) {
+        return false; // Neplatný vstup
+    }
+    // Zavolanie dátovej vrstvy na načítanie zoznamu tabuliek
+    return data_table_list(user_id, result, result_size);
+}
+
 ColumnType convert_type(const char* type) {
     if (strcmp(type, "string") == 0) return TYPE_STRING;
     if (strcmp(type, "int") == 0) return TYPE_INT;
@@ -44,4 +52,20 @@ ColumnType convert_type(const char* type) {
     if (strcmp(type, "boolean") == 0) return TYPE_BOOLEAN;
     if (strcmp(type, "date") == 0) return TYPE_DATE;
     return -1;
+}
+
+_Bool list_records(const char* table_name, int user_id, const char* filter, char* result, size_t result_size) {
+    if (table_name == NULL || strlen(table_name) == 0 || result == NULL || result_size == 0) {
+        return false; // Neplatné vstupy
+    }
+
+    // Zavolajte funkciu z dátovej vrstvy
+    return data_table_list_records(table_name, user_id, filter, result, result_size);
+}
+
+_Bool sort_table(const char* table_name, int user_id, const char* sort_column, char* result, size_t result_size) {
+    if (table_name == NULL || sort_column == NULL || result == NULL || result_size == 0) {
+        return false;
+    }
+    return data_table_sort(table_name, user_id, sort_column, result, result_size);
 }

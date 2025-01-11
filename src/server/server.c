@@ -60,6 +60,8 @@ void* handle_client_connection(void* arg) {
                 perror("Send failed");
                 break;
             }
+            printf("Sending response to client (Socket %d): Session ID: %d, Data: %s\n",
+                   client_socket, res.session_id, res.data);
         }
 
         close_socket(client_socket);

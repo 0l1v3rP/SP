@@ -5,15 +5,17 @@
 #include <string.h>
 #ifdef _WIN32
     #include <winsock2.h>
+    #include <bits/pthreadtypes.h>
 #else
     #include <unistd.h>
     #include <sys/socket.h>
     #include <netinet/in.h>
+    #include <pthread.h>
 #endif
 #include <pthread.h>
 
 #include "./handlers/commonHandler.h"
-#include <bits/pthreadtypes.h>
+
 
 typedef struct {
     int client_socket;

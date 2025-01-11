@@ -11,6 +11,9 @@ static const CommandMapping COMMANDS[] = {
     {"delete_table", handle_delete_table},
     {"add_record", handle_add_record},
     {"delete_record", handle_delete_record},
+    {"list_tables", handle_list_tables},
+    {"list_records", handle_list_records},
+    {"sort_table", handle_sort_table},
 
     {NULL, NULL}
 };

@@ -120,3 +120,58 @@ void handle_delete_record(Request* req, Response* res, Session* session) {
         snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Failed to delete record from table '%s'", table_name);
     }
 }
+
+void handle_list_tables(Request* req, Response* res, Session* session) {
+    if (!signed_in(req, res)) return;
+
+    char result[MAX_CHUNK_SIZE];
+    if (list_all_tables(session->user_id, result, sizeof(result))) {
+        snprintf(res->data, MAX_CHUNK_SIZE, "Tables: %s", result);
+    } else {
+        snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Failed to list tables.");
+    }
+}
+
+void handle_list_records(Request* req, Response* res, Session* session) {
+    if (!signed_in(req, res)) return;
+
+    char table_name[MAX_TABLE_NAME_LENGTH];
+    char filter[MAX_RECORD_LENGTH];
+    int args = sscanf(req->data, "%s %[^\n]", table_name, filter);
+
+    char result[MAX_CHUNK_SIZE];
+    if (args == 1) { // Len názov tabuľky
+        if (list_records(table_name, session->user_id, NULL, result, sizeof(result))) {
+            snprintf(res->data, MAX_CHUNK_SIZE, "Records from table '%s':\n%s", table_name, result);
+        } else {
+            snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Failed to list records from table '%s'.", table_name);
+        }
+    } else if (args == 2) { // Názov tabuľky + filter
+        if (list_records(table_name, session->user_id, filter, result, sizeof(result))) {
+            snprintf(res->data, MAX_CHUNK_SIZE, "Filtered records from table '%s' containing '%s':\n%s", table_name, filter, result);
+        } else {
+            snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Failed to list records from table '%s'.", table_name);
+        }
+    } else {
+        snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Invalid format. Expected {table_name} or {table_name} {filter_value}.");
+    }
+}
+
+void handle_sort_table(Request* req, Response* res, Session* session) {
+    if (!signed_in(req, res)) return;
+
+    char table_name[MAX_TABLE_NAME_LENGTH];
+    char sort_column[MAX_COLUMN_NAME_LENGTH];
+
+    if (sscanf(req->data, "%s %s", table_name, sort_column) != 2) {
+        snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Invalid format. Expected {table_name} {sort_column}.");
+        return;
+    }
+
+    char result[MAX_CHUNK_SIZE];
+    if (sort_table(table_name, session->user_id, sort_column, result, sizeof(result))) {
+        snprintf(res->data, MAX_CHUNK_SIZE, "Table '%s' sorted by '%s':\n%s", table_name, sort_column, result);
+    } else {
+        snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Failed to sort table '%s' by '%s'.", table_name, sort_column);
+    }
+}
