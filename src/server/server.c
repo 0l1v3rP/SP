@@ -36,37 +36,41 @@ void initialize_files() {
 }
 
 void* handle_client_connection(void* arg) {
-        ClientArgs* args = (ClientArgs*)arg;
-        int client_socket = args->client_socket;
-        pthread_mutex_t* db_mutex = args->db_mutex;
-        free(args);
+    ClientArgs* args = (ClientArgs*)arg;
+    int client_socket = args->client_socket;
+    pthread_mutex_t* db_mutex = args->db_mutex;
+    free(args);
 
-        Request req;
-        Response res;
-        while (1) {
-            memset(&req, 0, sizeof(Request));
-            memset(&res, 0, sizeof(Response));
-            int bytes_read = recv_chunked(client_socket, (char*)&req, sizeof(Request));
-            if (bytes_read <= 0) {
-                printf("Client disconnected. Socket descriptor: %d\n", client_socket);
-                break;
-            }
+    Request req;
+    Response res;
 
+    while (1) {
+        memset(&req, 0, sizeof(Request));
+        memset(&res, 0, sizeof(Response));
 
-            pthread_mutex_lock(db_mutex);
-            handle_request(&req, &res);
-            pthread_mutex_unlock(db_mutex);
-            if (send_chunked(client_socket, (char*)&res, sizeof(Response)) < 0) {
-                perror("Send failed");
-                break;
-            }
-            printf("Sending response to client (Socket %d): Session ID: %d, Data: %s\n",
-                   client_socket, res.session_id, res.data);
+        int bytes_read = recv_chunked(client_socket, (char*)&req, sizeof(Request));
+        if (bytes_read <= 0) {
+            printf("Client disconnected. Socket descriptor: %d\n", client_socket);
+            break;
         }
 
-        close_socket(client_socket);
-        return NULL;
+        pthread_mutex_lock(db_mutex);
+        handle_request(&req, &res);
+        pthread_mutex_unlock(db_mutex);
+
+        if (send_chunked(client_socket, (char*)&res, sizeof(Response)) < 0) {
+            perror("Send failed");
+            break;
+        }
+        printf("Sending response to client (Socket %d): Session ID: %d, Data: %s\n",
+               client_socket, res.session_id, res.data);
     }
+
+    close_socket(client_socket);
+    return NULL;
+}
+
+
 
 void start_server() {
     #ifdef _WIN32

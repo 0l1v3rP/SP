@@ -23,21 +23,23 @@ void handle_login(Request* req, Response* res, Session* session) {
     char password[MAX_PASSWORD] = {0};
     sscanf(req->data, "%s %s", username, password);
     int session_id;
+
     if (req->session_id == 0 && login_user(username, password, &session_id)) {
-        Session * usersession = get_session(session_id);
-        if(usersession == NULL) {
+        Session* usersession = get_session(session_id);
+        if (usersession == NULL) {
             snprintf(res->data, MAX_CHUNK_SIZE, "%s", "LOGIN FAILED");
             res->session_id = 0;
             return;
         }
-        snprintf(res->data, MAX_CHUNK_SIZE, "%s","LOGIN SUCCESS");
+        snprintf(res->data, MAX_CHUNK_SIZE, "%s", "LOGIN SUCCESS");
         res->session_id = session_id;
-        free(usersession);
+        free(usersession); // Správne uvoľnenie pamäte
     } else {
         snprintf(res->data, MAX_CHUNK_SIZE, "LOGIN FAILED");
         res->session_id = req->session_id;
     }
 }
+
 
 void handle_logout(Request* req, Response* res, Session* session) {
     if (req->session_id == 0) {
