@@ -68,29 +68,31 @@ void start_client(const char *server_ip) {
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
-    inet_pton(AF_INET, server_ip, &server_addr.sin_addr);
+    if (inet_pton(AF_INET, server_ip, &server_addr.sin_addr) <= 0) {
+        perror("Invalid server IP address");
+        close(client_socket);
+        exit(1);
+    }
 
     if (connect(client_socket, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
         perror("Connection to server failed");
+        close(client_socket);
         exit(1);
-    } else {
-        printf("Connected to server at %s:%d\n", server_ip, PORT);
-        printf("press:\n\t 'help' for manual\n\t 'exit' for exiting program\n");
-
     }
 
-    Request req;
-    req.session_id = 0;
-    req.data[0] = '\0';
+    printf("Connected to server at %s:%d\n", server_ip, PORT);
+    printf("Press:\n\t 'help' for manual\n\t 'exit' for exiting program\n");
 
-    Response res;
-    res.data[0] = '\0';
+    Request req = {0};
+    Response res = {0};
 
     while (running) {
         printf("Enter Command: ");
-        fgets(req.command, sizeof(req.command), stdin);
+        if (!fgets(req.command, sizeof(req.command), stdin)) {
+            perror("Failed to read command");
+            break;
+        }
         req.command[strcspn(req.command, "\n")] = 0;
-
 
         if (strcmp(req.command, "exit") == 0) {
             running = 0;
@@ -104,30 +106,31 @@ void start_client(const char *server_ip) {
         }
 
         printf("Enter Data: ");
-        fgets(req.data, sizeof(req.data), stdin);
-
+        if (!fgets(req.data, sizeof(req.data), stdin)) {
+            perror("Failed to read data");
+            break;
+        }
         req.data[strcspn(req.data, "\n")] = 0;
 
         if (send_chunked(client_socket, (char*)&req, sizeof(Request)) < 0) {
             perror("Send failed");
-            running = 0;
             break;
         }
-        printf("Sent command: %s\n", req.command);
-        int bytes_read = recv_chunked(client_socket, (char*)&res, sizeof(Response));
 
+        printf("Sent command: %s\n", req.command);
+
+        int bytes_read = recv_chunked(client_socket, (char*)&res, sizeof(Response));
         if (bytes_read > 0) {
             printf("Server response: %s\n", res.data);
             req.session_id = res.session_id;
         } else if (bytes_read == 0) {
             printf("Server closed the connection.\n");
-            running = 0;
+            break;
         } else {
-            perror("Recv failed");
-            running = 0;
+            perror("Receive failed");
+            break;
         }
     }
-
 
 #ifdef _WIN32
     closesocket(client_socket);
@@ -136,3 +139,4 @@ void start_client(const char *server_ip) {
     close(client_socket);
 #endif
 }
+

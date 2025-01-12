@@ -11,6 +11,9 @@ static const CommandMapping COMMANDS[] = {
     {"delete_table", handle_delete_table},
     {"add_record", handle_add_record},
     {"delete_record", handle_delete_record},
+    {"list_tables", handle_list_tables},
+    {"list_records", handle_list_records},
+    {"sort_table", handle_sort_table},
 
     {NULL, NULL}
 };
@@ -24,7 +27,7 @@ _Bool hasValidSession(Request* req, Response* res, Session** session) {
                 logout_user(req->session_id);
                 strncpy(res->data, "SESSION EXPIRED", MAX_CHUNK_SIZE);
                 free(*session);
-                *session = NULL; // Clear the session pointer to avoid dangling pointers
+                *session = NULL;
                 return false;
             }
         } else {
@@ -37,20 +40,32 @@ _Bool hasValidSession(Request* req, Response* res, Session** session) {
 }
 
 
-
 void handle_request(Request* req, Response* res) {
     Session* session = NULL;
-    if(!hasValidSession(req, res, &session)) return;
+    if (!hasValidSession(req, res, &session)) {
+        return;
+    }
 
     for (const CommandMapping* cmd = COMMANDS; cmd->command != NULL; cmd++) {
         if (strcmp(req->command, cmd->command) == 0) {
             cmd->handler(req, res, session);
+            if (session != NULL) {
+                free(session); // Ensure session is freed after handling
+                session = NULL;
+            }
             return;
         }
     }
+
     snprintf(res->data, MAX_CHUNK_SIZE, "UNKNOWN COMMAND");
     res->session_id = req->session_id;
+
+    if (session != NULL) {
+        free(session);
+        session = NULL;
+    }
 }
+
 
 _Bool signed_in(Request* req, Response* res) {
     res->session_id = req->session_id;
