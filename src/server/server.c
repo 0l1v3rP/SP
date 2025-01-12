@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 
@@ -70,20 +71,39 @@ void* handle_client_connection(void* arg) {
     return NULL;
 }
 
+// Globálna premenná na kontrolu bežiaceho stavu servera
+volatile sig_atomic_t server_running = 1;
 
+// Funkcia na spracovanie signálu
+void handle_signal(int signal) {
+    if (signal == SIGINT) {
+        printf("\nReceived SIGINT. Shutting down the server...\n");
+        server_running = 0;
+    }
+}
 
 void start_server() {
-    #ifdef _WIN32
-        WSADATA wsaData;
+#ifdef _WIN32
+    WSADATA wsaData;
         if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
             perror("WSAStartup failed");
             exit(1);
         }
-    #endif
+#endif
 
     int server_socket;
     struct sockaddr_in server_addr;
     pthread_mutex_t db_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+    // Nastavenie signal handlingu
+    struct sigaction sa;
+    sa.sa_handler = handle_signal;
+    sa.sa_flags = 0;
+    sigemptyset(&sa.sa_mask);
+    if (sigaction(SIGINT, &sa, NULL) == -1) {
+        perror("sigaction failed");
+        exit(1);
+    }
 
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket < 0) {
@@ -117,13 +137,15 @@ void start_server() {
 
     printf("Server running on port %d...\n", PORT);
     initialize_files();
-    while (1) {
+
+    while (server_running) {
         struct sockaddr_in client_addr;
         socklen_t client_len = sizeof(client_addr);
 
         printf("Waiting for a client...\n");
         int client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_len);
         if (client_socket < 0) {
+            if (!server_running) break;  // Ak server zastavujeme, ignorujeme chyby
             perror("Accept failed");
             continue;
         }
@@ -154,7 +176,9 @@ void start_server() {
     close_socket(server_socket);
     pthread_mutex_destroy(&db_mutex);
 
-    #ifdef _WIN32
-        WSACleanup();
-    #endif
+#ifdef _WIN32
+    WSACleanup();
+#endif
+
+    printf("Server shut down successful.\n");
 }
