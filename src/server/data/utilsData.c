@@ -6,7 +6,7 @@ int generate_unique_id() {
     FILE *file = fopen(counter_file, "r+");
     if (!file) {
         file = fopen(counter_file, "w");
-        if (!file) return -1; // Failed to create the counter file
+        if (!file) return -1; 
         int initial_id = 1;
         fprintf(file, "%d", initial_id);
         fclose(file);

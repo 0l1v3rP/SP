@@ -23,7 +23,7 @@ _Bool delete_generic(const char *filename, int id, size_t offset, size_t struct_
 
     _Bool success = false;
     while (fread(buffer, struct_size, 1, file)) {
-        // Assume ID is at the offset
+
         int *current_id = (int *)((char *)buffer + offset);
         if (*current_id != id) {
             fwrite(buffer, struct_size, 1, temp);
@@ -71,13 +71,13 @@ void* get_by_condition_generic(const char *filename,
     while (fread(buffer, struct_size, 1, file)) {
         if (condition(buffer, context)) {
             fclose(file);
-            return buffer; // Found a matching record
+            return buffer; 
         }
     }
 
     free(buffer);
     fclose(file);
-    return NULL; // No match found
+    return NULL; 
 }
 
 _Bool match_id(void *record, void *context) {

@@ -33,7 +33,7 @@ void handle_login(Request* req, Response* res, Session* session) {
         }
         snprintf(res->data, MAX_CHUNK_SIZE, "%s", "LOGIN SUCCESS");
         res->session_id = session_id;
-        free(usersession); // Správne uvoľnenie pamäte
+        free(usersession); 
     } else {
         snprintf(res->data, MAX_CHUNK_SIZE, "LOGIN FAILED");
         res->session_id = req->session_id;

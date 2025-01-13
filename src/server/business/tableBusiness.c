@@ -58,9 +58,9 @@ _Bool delete_record_table(const char *table_name, int user_id, int record_id) {
 
 _Bool list_all_tables(int user_id, char *result, size_t result_size) {
     if (result == NULL || result_size == 0) {
-        return false; // Neplatný vstup
+        return false; 
     }
-    // Zavolanie dátovej vrstvy na načítanie zoznamu tabuliek
+
     return data_table_list(user_id, result, result_size);
 }
 

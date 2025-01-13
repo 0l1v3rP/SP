@@ -71,10 +71,8 @@ void* handle_client_connection(void* arg) {
     return NULL;
 }
 
-// Globálna premenná na kontrolu bežiaceho stavu servera
 volatile sig_atomic_t server_running = 1;
 
-// Funkcia na spracovanie signálu
 void handle_signal(int signal) {
     if (signal == SIGINT) {
         printf("\nReceived SIGINT. Shutting down the server...\n");
@@ -95,7 +93,6 @@ void start_server() {
     struct sockaddr_in server_addr;
     pthread_mutex_t db_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-    // Nastavenie signal handlingu
     struct sigaction sa;
     sa.sa_handler = handle_signal;
     sa.sa_flags = 0;
@@ -111,7 +108,6 @@ void start_server() {
         exit(1);
     }
 
-    // Enable address reuse
     int opt = 1;
     if (setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, (char*)&opt, sizeof(opt)) < 0) {
         perror("setsockopt failed");
@@ -145,14 +141,14 @@ void start_server() {
         printf("Waiting for a client...\n");
         int client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_len);
         if (client_socket < 0) {
-            if (!server_running) break;  // Ak server zastavujeme, ignorujeme chyby
+            if (!server_running) break;  
             perror("Accept failed");
             continue;
         }
 
         printf("Client connected. Socket descriptor: %d\n", client_socket);
 
-        // Create arguments structure
+        
         ClientArgs* args = malloc(sizeof(ClientArgs));
         if (args == NULL) {
             perror("Memory allocation failed");
@@ -162,7 +158,6 @@ void start_server() {
         args->client_socket = client_socket;
         args->db_mutex = &db_mutex;
 
-        // Create new thread for client
         pthread_t thread;
         if (pthread_create(&thread, NULL, handle_client_connection, args) != 0) {
             perror("Thread creation failed");

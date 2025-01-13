@@ -50,7 +50,7 @@ void handle_request(Request* req, Response* res) {
         if (strcmp(req->command, cmd->command) == 0) {
             cmd->handler(req, res, session);
             if (session != NULL) {
-                free(session); // Ensure session is freed after handling
+                free(session); 
                 session = NULL;
             }
             return;

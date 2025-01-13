@@ -131,7 +131,7 @@ _Bool data_table_delete_record(const char *table_name, int user_id, int index) {
         line = NULL;
     }
 
-    // Uvoľni pamäť, ak cyklus skončil predčasne
+
     if (line != NULL) {
         free(line);
     }
@@ -140,7 +140,7 @@ _Bool data_table_delete_record(const char *table_name, int user_id, int index) {
     fclose(temp_file);
 
 
-    // Ak rename zlyhá, odstráň dočasný súbor
+
     if (deleted) {
         if (remove(filename) != 0 || rename(temp_filename, filename) != 0) {
             remove(temp_filename);
@@ -158,18 +158,18 @@ _Bool data_table_delete_all_user_tables(int user_id) {
     _Bool success = true;
 
 #ifdef _WIN32
-    // Windows version
+
     snprintf(command, sizeof(command), "del table_%d_*.dat 2>nul", user_id);
 #else
-    // Unix/Linux version
+
     snprintf(command, sizeof(command), "rm -f table_%d_*.dat 2>/dev/null", user_id);
 #endif
 
     int result = system(command);
 
-    // Check if command executed successfully
+
     if (result != 0) {
-        // Alternative manual approach if system command fails
+
         DIR *dir;
         struct dirent *entry;
         char filename[256];
@@ -241,7 +241,7 @@ _Bool data_table_list(int user_id, char *result, size_t result_size) {
 _Bool
 data_table_list_records(const char *table_name, int user_id, const char *filter, char *result, size_t result_size) {
     if (table_name == NULL || result == NULL || result_size == 0) {
-        return false; // Neplatné vstupy
+        return false; 
     }
 
     char filename[256];
@@ -256,7 +256,7 @@ data_table_list_records(const char *table_name, int user_id, const char *filter,
     char *line = NULL;
     size_t len = 0;
 
-    // Preskočte hlavičku (prvý riadok obsahuje definíciu stĺpcov)
+
     if (getline(&line, &len, file) == -1) {
         snprintf(result, result_size, "ERROR: Table '%s' is empty or corrupt.", table_name);
         fclose(file);
@@ -267,7 +267,7 @@ data_table_list_records(const char *table_name, int user_id, const char *filter,
     size_t used_size = 0;
     result[0] = '\0';
 
-    // Čítajte záznamy riadok po riadku
+
     while (getline(&line, &len, file) != -1) {
         if (filter == NULL || strstr(line, filter) != NULL) {
             size_t line_length = strlen(line);
@@ -297,22 +297,22 @@ data_table_list_records(const char *table_name, int user_id, const char *filter,
 char *trim(char *str) {
     char *end;
 
-    // Trim leading spaces
+
     while (isspace((unsigned char) *str)) str++;
 
-    if (*str == 0) return str; // Ak je prázdny string, vráťte ho
+    if (*str == 0) return str; 
 
-    // Trim trailing spaces
+
     end = str + strlen(str) - 1;
     while (end > str && isspace((unsigned char) *end)) end--;
 
-    // Null-terminate
+
     *(end + 1) = '\0';
 
     return str;
 }
 
-// Funkcia na získanie hodnoty stĺpca podľa indexu
+
 char *get_column_value(char *line, int column_index) {
     char *token = strtok(line, " ");
     for (int i = 0; i < column_index && token != NULL; i++) {
@@ -321,7 +321,7 @@ char *get_column_value(char *line, int column_index) {
     return token;
 }
 
-//porovnávacia funkcia
+
 int compare_records_context(const void *a, const void *b) {
     const Record *recA = (const Record *) a;
     const Record *recB = (const Record *) b;
@@ -411,7 +411,7 @@ _Bool data_table_sort(const char *table_name, int user_id, const char *sort_colu
     char *line = NULL;
     size_t len = 0;
 
-    // Načítajte hlavičku
+
     if (getline(&line, &len, file) == -1) {
         snprintf(result, result_size, "ERROR: Table '%s' is empty or corrupt.", table_name);
         fclose(file);
@@ -419,7 +419,6 @@ _Bool data_table_sort(const char *table_name, int user_id, const char *sort_colu
         return false;
     }
 
-    // Spracovanie hlavičky
     char columns[10][256];
     int column_types[10];
     int column_count = 0;
@@ -433,7 +432,7 @@ _Bool data_table_sort(const char *table_name, int user_id, const char *sort_colu
         token = strtok(NULL, "[] ");
     }
 
-    // Určenie indexu stĺpca na triedenie
+
     int sort_index = -1;
     for (int i = 0; i < column_count; i++) {
         if (strcmp(columns[i], sort_column) == 0) {
@@ -452,7 +451,7 @@ _Bool data_table_sort(const char *table_name, int user_id, const char *sort_colu
     sort_context.sort_index = sort_index;
     sort_context.column_type = column_types[sort_index];
 
-    // Načítajte záznamy
+
     Record *records = NULL;
     size_t record_count = 0;
     while (getline(&line, &len, file) != -1) {
@@ -476,10 +475,9 @@ _Bool data_table_sort(const char *table_name, int user_id, const char *sort_colu
     fclose(file);
     free(line);
 
-    // Zotriedenie záznamov
+
     qsort(records, record_count, sizeof(Record), compare_records_context);
 
-    // Zápis záznamov späť do súboru
     FILE *sorted_file = fopen(filename, "w");
     if (sorted_file == NULL) {
         snprintf(result, result_size, "ERROR: Unable to open table '%s' for writing.", table_name);
@@ -490,7 +488,7 @@ _Bool data_table_sort(const char *table_name, int user_id, const char *sort_colu
         return false;
     }
 
-    // Zápis hlavičky
+
     for (int i = 0; i < column_count; i++) {
         fprintf(sorted_file, "[%s %d]", columns[i], column_types[i]);
         if (i < column_count - 1) {
@@ -499,7 +497,7 @@ _Bool data_table_sort(const char *table_name, int user_id, const char *sort_colu
     }
     fprintf(sorted_file, "\n");
 
-    // Zápis zotriedených záznamov
+
     for (size_t i = 0; i < record_count; i++) {
         fprintf(sorted_file, "%s\n", records[i].line);
         free(records[i].line);

@@ -30,8 +30,8 @@ void handle_create_table(Request* req, Response* res, Session* session) {
             continue;
         }
 
-        char column_name[256];  // Temporary buffer
-        char column_type[256];  // Temporary buffer
+        char column_name[256];  
+        char column_type[256];  
 
         if (sscanf(token, "%s %s", column_name, column_type) != 2) {
             snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Invalid format for column: %s", token);
@@ -140,13 +140,13 @@ void handle_list_records(Request* req, Response* res, Session* session) {
     int args = sscanf(req->data, "%s %[^\n]", table_name, filter);
 
     char result[MAX_CHUNK_SIZE];
-    if (args == 1) { // Len názov tabuľky
+    if (args == 1) { 
         if (list_records(table_name, session->user_id, NULL, result, sizeof(result))) {
             snprintf(res->data, MAX_CHUNK_SIZE, "Records from table '%s':\n%s", table_name, result);
         } else {
             snprintf(res->data, MAX_CHUNK_SIZE, "ERROR: Failed to list records from table '%s'.", table_name);
         }
-    } else if (args == 2) { // Názov tabuľky + filter
+    } else if (args == 2) { 
         if (list_records(table_name, session->user_id, filter, result, sizeof(result))) {
             snprintf(res->data, MAX_CHUNK_SIZE, "Filtered records from table '%s' containing '%s':\n%s", table_name, filter, result);
         } else {
